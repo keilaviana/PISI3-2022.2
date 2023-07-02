@@ -48,7 +48,7 @@ def show():
 def build_scatter_section(df:pd.DataFrame):
     #see: https://plotly.com/python/marker-style/
     st.markdown('<h3>Gráfico de dispersão</h3>', unsafe_allow_html=True)
-    st.write('Podemos visualizar a distribuição dos alimentos em relação a duas variáveis: eixo x pode representa a categoria de alimentos e o eixo y pode representa a quantidade de um nutriente específico')
+    st.write('Podemos visualizar a distribuição dos alimentos em relação a duas variáveis: eixo x pode representa a categoria de alimentos e o eixo y pode representa a quantidade de um nutriente específico.')
 
     df.sort_values(by=['food_category_id','fdc_id'], ascending=[False, True], inplace=True)
     fig = px.scatter(df, x='food_category_id', y='fdc_id', color_discrete_sequence=['#DE7047'], 
