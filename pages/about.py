@@ -6,7 +6,7 @@ import plotly.express as px
 
 
 def show():
-    st.title("O que posso obter a partir desses dados?")
+    st.title("O que possível obter a partir desses dados?")
     st.write("Nessa página será possível perceber relações importantes entre os datasets")
 
     food_data = pd.read_csv('./data/food.csv')
