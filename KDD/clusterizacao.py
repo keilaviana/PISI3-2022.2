@@ -4,15 +4,11 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import seaborn as sb
 
-dataset = pd.read_parquet("tabelafinal.parquet")
+dataset = pd.read_parquet("./kdd/tabelafinal.parquet")
 
 dt = dataset[['description','nutrient_name','amount','nutrient_unit']]
 
-def str_to_float(value):
-    value = value.replace('.', '').replace(',', '.')
-    return float(value)
 
-dt['amount'] = dt['amount'].apply(str_to_float)
 dt['description'] = dt['description'].apply(lambda x: x.split(',')[0])
 dt['description'] = dt['description'].apply(lambda x: x.split('-')[0])
 dt['description'] = dt['description'].str.upper()
