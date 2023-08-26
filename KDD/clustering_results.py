@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from yellowbrick.cluster import KElbowVisualizer
 import seaborn as sb
 import numpy as np
+from sklearn.manifold import TSNE
 
 dataset = pd.read_parquet("tabelas.parquet")
 
@@ -94,3 +95,15 @@ print("\nAlimentos no Cluster 1:")
 for index, row in cluster_x_data.iterrows():
     print(f"  Alimento: {row['description']}, Quantidade: {row['count']}")
 print()
+
+# T_SNE
+tsne = TSNE(n_components=2, random_state=42)
+tsne_data = tsne.fit_transform(data_for_clustering)
+tsne_df = pd.DataFrame(tsne_data, columns=['Dim1', 'Dim2'])
+tsne_df['cluster_label'] = df['cluster_label']
+
+plt.figure(figsize=(10, 6))
+ax = sb.scatterplot(x='Dim1', y='Dim2', hue='cluster_label', data=tsne_df, palette='Set1')
+plt.title('Agrupamento dos Pontos por Cluster')
+ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), title='Clusters')
+plt.show()
