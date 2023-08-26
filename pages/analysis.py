@@ -3,8 +3,6 @@ import streamlit.components.v1 as components
 import streamlit as st
 from utils import df_names, read_df
 
-
-
 def show():
     # Lendo o conteúdo do arquivo HTML
     with open('./analise.html', 'r') as file:
