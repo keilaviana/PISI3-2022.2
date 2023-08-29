@@ -1,0 +1,12 @@
+cluster_counts = df['cluster_label'].value_counts()
+
+print(cluster_counts)
+
+import seaborn as sb
+
+plt.figure(figsize=(10, 6))
+sb.barplot(x=cluster_counts.index, y=cluster_counts.values)
+plt.xlabel('Cluster')
+plt.ylabel('Número de Elementos')
+plt.title('Quantidade de Elementos por Cluster')
+plt.show()
