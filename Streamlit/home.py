@@ -1,6 +1,7 @@
 import streamlit as st
 import read_df as rd
 import groups as gp
+import clusters_nutrient as cn
 
 st.set_page_config(
     page_title= "#πsi3",
@@ -8,7 +9,7 @@ st.set_page_config(
     layout="wide"
 )
 
-menu_options = ["🍴Página Inicial", "🖇️Tabela", "📊Grupos"]
+menu_options = ["🍴Página Inicial", "🖇️Tabela", "📊Grupos", "🔎Detalhes de Agrupamento"]
 selected_option = st.sidebar.selectbox("Selecione uma página", menu_options)
 
 if selected_option == "🍴Página Inicial":
@@ -20,3 +21,5 @@ elif selected_option == "🖇️Tabela":
     rd.main()
 elif selected_option == "📊Grupos":
     gp.main()
+elif selected_option == "🔎Detalhes de Agrupamento":
+    cn.main()
