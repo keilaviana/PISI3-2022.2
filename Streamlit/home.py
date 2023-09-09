@@ -1,7 +1,7 @@
 import streamlit as st
 import read_df as rd
 import groups as gp
-import clusters_nutrient as cn
+import details as dt
 
 st.set_page_config(
     page_title= "#πsi3",
@@ -22,4 +22,4 @@ elif selected_option == "🖇️Tabela":
 elif selected_option == "📊Grupos":
     gp.main()
 elif selected_option == "🔎Detalhes de Agrupamento":
-    cn.main()
+    dt.main()
