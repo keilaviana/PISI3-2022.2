@@ -7,7 +7,6 @@ dataset = pd.read_parquet("./KDD/tabelafinal.parquet")
 
 dt = dataset[['description', 'nutrient_name', 'amount', 'nutrient_unit']]
 
-# Make a copy of the original 'amount' column
 original_amount = dt['amount'].copy()
 
 dt['description'] = dt['description'].apply(lambda x: x.split(',')[0])
@@ -87,7 +86,6 @@ def main():
             st.markdown(f"### Cluster {cluster_label}")
             cluster_data = original_data[df['cluster_label'] == cluster_label][['description', 'nutrient_name']]
             
-            # Use original_amount to display the original 'amount' values
             cluster_data['amount'] = original_amount[df['cluster_label'] == cluster_label].values
             
             st.dataframe(cluster_data)
