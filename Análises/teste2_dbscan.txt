@@ -1,0 +1,41 @@
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import DBSCAN
+import matplotlib.pyplot as plt
+
+# Carregar os dados
+dataset = pd.read_parquet("tabelafinal.parquet")
+
+# Selecionar colunas relevantes
+selected_columns = ['amount', 'description', 'nutrient_name', 'nutrient_unit']
+
+# Pré-processar os dados
+dt = dataset[selected_columns]
+
+# Pré-processamento das colunas
+dt['description'] = dt['description'].apply(lambda x: x.split(',')[0].split('-')[0].upper())
+dt['nutrient_name'] = dt['nutrient_name'].apply(lambda x: x.split(' ')[0].upper())
+dt['nutrient_unit'] = dt['nutrient_unit'].str.upper()
+
+# Remover linhas com 'amount' igual a zero
+dt = dt[dt['amount'] != 0]
+
+# Escalonar as quantidades (coluna 'amount')
+scaler = StandardScaler()
+dt['amount'] = scaler.fit_transform(dt[['amount']])
+
+# Aplicar o DBSCAN
+eps = 0.01
+min_samples = 10
+dbscan = DBSCAN(eps=eps, min_samples=min_samples)
+cluster_labels = dbscan.fit_predict(dt[['amount']])
+
+# Adicionar os rótulos de cluster de volta ao DataFrame original
+dt['cluster_label'] = cluster_labels
+
+# Visualizar os resultados
+plt.scatter(dt['amount'], dt['amount'], c=cluster_labels, cmap='viridis')
+plt.xlabel("Amount")
+plt.ylabel("Amount")
+plt.title("Dispersão dos Clusters")
+plt.show()
